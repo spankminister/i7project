@@ -1,0 +1,15 @@
+OSXINTERPRETER="interpreter/glulxe/glulxe"
+
+platform='unknown'
+unamestr=`uname`
+if [[ "$unamestr" == 'Linux' ]]; then
+   platform='linux'
+elif [[ "$unamestr" == 'Darwin' ]]; then
+   platform='osx'
+   interpreter=$OSXINTERPRETER
+fi
+
+echo "$interpreter"
+
+$interpreter transhominid.inform/Build/output.gblorb
+#/usr/local/share/inform7/Interpreters/dumb-glulxe transhominid.inform/Build/output.gblorb
