@@ -132,15 +132,6 @@ unless (($NONINTERACTIVE) or ($idesettings{'NAME'})) {
     print "\n";
 }
 
-while (! -d "$idesettings{'PREFIX'}/share/inform7" ) {
-    print "\n";
-    print "I could not find the Inform 7 libraries under $idesettings{'PREFIX'}.\n";
-    if ($NONINTERACTIVE) {
-	exit 2;
-    }
-    $idesettings{'PREFIX'}=printprompt("Please enter the path where you installed the i7 package > ");
-}
-
 writeideprefs() unless ($NONINTERACTIVE);    
 
 INTRO: while(1) {
@@ -198,7 +189,8 @@ readsettings("$l/Settings.plist");
 setsettings($opt_s);
 
 %ni_settings = (
-    'internal' => "--internal \"$idesettings{'PREFIX'}/share/inform7/data\""
+    #'internal' => "--internal \"$idesettings{'PREFIX'}/share/inform7/data\""
+    'internal' => "--internal \"/Applications/Inform.app/Contents/Resources/Internal\""
 		);
 
 MAINLOOP: while(1) {
@@ -506,6 +498,7 @@ sub compile {
     }
     print "***I7 compilation command: $cmd***\n";
     my $rc = system($cmd);
+    print "***return code is $rc***\n";
     return $rc if ($rc);
     return 1 unless ((-f $inffile) && !(-z $inffile)); 
     # The pager eats a failed return code....
