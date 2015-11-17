@@ -1,0 +1,3 @@
+[submodule "interpreter/glulxe"]
+	path = interpreter/glulxe
+	url = https://github.com/erkyrath/glulxe.git
